@@ -1,0 +1,50 @@
+CREATE SCHEMA CW2;
+GO
+
+CREATE TABLE CW2.Users (
+    UserID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(100),
+    Password VARCHAR(100),
+    ProfilePicture VARCHAR(100),
+    DateOfBirth DATE,
+    Units VARCHAR(10),
+    MarketingLanguage VARCHAR(50),
+    Height FLOAT,
+    Weight FLOAT
+);
+GO
+
+CREATE TABLE CW2.Activities (
+    ActivityID INT PRIMARY KEY,
+    ActivityDescription VARCHAR(100)
+);
+GO
+
+CREATE TABLE CW2.UserActivities (
+    UserID INT,
+    ActivityID INT,
+    PRIMARY KEY (UserID, ActivityID),
+    FOREIGN KEY (UserID) REFERENCES CW2.Users (UserID),
+    FOREIGN KEY (ActivityID) REFERENCES CW2.Activities (ActivityID)
+);
+GO
+
+CREATE TABLE CW2.UserInformation (
+    InfoID INT PRIMARY KEY,
+    Bio VARCHAR(MAX)
+);
+GO
+
+CREATE TABLE CW2.UserLocations (
+    LocID INT PRIMARY KEY,
+    Location VARCHAR(100)
+);
+GO
+
+CREATE TABLE CW2.UserTimePreferences (
+    TimeID INT PRIMARY KEY,
+    ActivityTimePreference VARCHAR(50)
+);
+GO
