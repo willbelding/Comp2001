@@ -1,50 +1,38 @@
-CREATE SCHEMA CW2;
-GO
-
-CREATE TABLE CW2.Users (
-    UserID INT PRIMARY KEY,
-    FirstName VARCHAR(50),
-    LastName VARCHAR(50),
-    Email VARCHAR(100),
-    Password VARCHAR(100),
-    ProfilePicture VARCHAR(100),
-    DateOfBirth DATE,
+CREATE TABLE PROFILE (
+    Email VARCHAR(255) PRIMARY KEY,
+    Profile_Picture VARCHAR(255),
+    First_Name VARCHAR(50),
+    Last_Name VARCHAR(50),
+    Bio TEXT,
+    Location_id INT,
+    Height INT,
+    Weight INT,
     Units VARCHAR(10),
-    MarketingLanguage VARCHAR(50),
-    Height FLOAT,
-    Weight FLOAT
+    Activity_Time_Preference VARCHAR(20),
+    Language_id INT,
+    FOREIGN KEY (Location_id) REFERENCES LOCATION(Location_id),
+    FOREIGN KEY (Language_id) REFERENCES LANGUAGE(Language_id)
 );
-GO
 
-CREATE TABLE CW2.Activities (
-    ActivityID INT PRIMARY KEY,
-    ActivityDescription VARCHAR(100)
+CREATE TABLE LOCATION (
+    Location_id INT PRIMARY KEY,
+    Location VARCHAR(255)
 );
-GO
 
-CREATE TABLE CW2.UserActivities (
-    UserID INT,
-    ActivityID INT,
-    PRIMARY KEY (UserID, ActivityID),
-    FOREIGN KEY (UserID) REFERENCES CW2.Users (UserID),
-    FOREIGN KEY (ActivityID) REFERENCES CW2.Activities (ActivityID)
+CREATE TABLE LANGUAGE (
+    Language_id INT PRIMARY KEY,
+    Language VARCHAR(255)
 );
-GO
 
-CREATE TABLE CW2.UserInformation (
-    InfoID INT PRIMARY KEY,
-    Bio VARCHAR(MAX)
+CREATE TABLE FAVOURITE_ACTIVITY (
+    Email VARCHAR(255),
+    Activity_id INT,
+    FOREIGN KEY (Email) REFERENCES PROFILE(Email),
+    FOREIGN KEY (Activity_id) REFERENCES ACTIVITIES(Activity_id),
+    PRIMARY KEY (Email, Activity_id)
 );
-GO
 
-CREATE TABLE CW2.UserLocations (
-    LocID INT PRIMARY KEY,
-    Location VARCHAR(100)
+CREATE TABLE ACTIVITIES (
+    Activity_id INT PRIMARY KEY,
+    Activity VARCHAR(255)
 );
-GO
-
-CREATE TABLE CW2.UserTimePreferences (
-    TimeID INT PRIMARY KEY,
-    ActivityTimePreference VARCHAR(50)
-);
-GO
